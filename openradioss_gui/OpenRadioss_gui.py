@@ -41,17 +41,17 @@ import gui_def
 
 class openradioss_gui:
 
-      def __init__(self,debug):
+      def __init__(self,debug,FullName):
 # Global Variables
         self.debug=debug
         self.current_platform=platform.system() 
         self.job_holder = JobHolder(self.debug)
         self.Window     = gui_def.window(vd3penabled)
           
-        self.job_file_entry=gui.Window.file('Job file (.rad, .key, or .k, or .inp)', gui.select_file, gui.Window.icon_folder)
-        self.job_holder = JobHolder(1)
-        
-        #self.job_file_entry=self.Window.file('Job file (.rad, .key, or .k, or .inp)', self.select_file, self.Window.icon_folder)
+        if FullName=='':
+            self.job_file_entry=self.Window.file('Job file (.rad, .key, or .k, or .inp)', self.select_file, self.Window.icon_folder)
+        else:
+            self.job_file_entry=self.Window.file(FullName, self.select_file, self.Window.icon_folder)
         
         # Create checkboxes
         self.nt_entry          = self.Window.thread_mpi('-nt', 5,0,2)
